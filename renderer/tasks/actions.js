@@ -83,8 +83,10 @@ module.exports = function(project) {
                 return path.split('.').slice(0,-1).join('.');
             }
             // start file moving
+            console.info('project.customScript:', project.customScript);
+            console.info('project:', JSON.stringify(project.customScript));
             if (project.customScript) {
-                const cmd = 'project.customScript'.replace('__src__', cutExtention(src)).replace('__dest__', cutExtention(dst));
+                const cmd = project.customScript.replace('__src__', cutExtention(src)).replace('__dest__', cutExtention(dst));
                 console.info(`[${project.uid}] applying actions: apply custom script: ${cmd}`);
                 exec(cmd, (error, stdout, stderr) => {
                     return error ? reject(error) : resolve(project);
