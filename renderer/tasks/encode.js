@@ -24,7 +24,7 @@ module.exports = function(project) {
         // remove file if exists
         fs.unlink(dst, () => {
             console.info(`[${project.uid}] applying actions: encoding result file...`);
-            const cmd = `C:\\Users\\Administrator\\ffmpeg\\bin\\ffmpeg.exe -i ${src}.avi -vcodec libx264 -acodec mp3 -movflags +faststart -pix_fmt yuv420p ${dst}.mp4`;
+            const cmd = `C:\\Users\\Administrator\\ffmpeg\\bin\\ffmpeg.exe -i ${src} -vcodec libx264 -movflags +faststart -pix_fmt yuv420p ${dst}.mp4`;
             console.log('cmd:', cmd);
             exec(cmd, (error, stdout, stderr) => {
                 return error ? reject(error) : resolve(project);
