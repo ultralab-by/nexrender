@@ -84,7 +84,7 @@ module.exports = function(project) {
             }
             // start file moving
             if (project.customScript) {
-                const cmd = 'project.customScript'.replace('__sourse__', cutExtention(src)).replace('__dist__', cutExtention(dst));
+                const cmd = 'project.customScript'.replace('__src__', cutExtention(src)).replace('__dest__', cutExtention(dst));
                 console.info(`[${project.uid}] applying actions: apply custom script: ${cmd}`);
                 exec(cmd, (error, stdout, stderr) => {
                     return error ? reject(error) : resolve(project);

@@ -32,7 +32,7 @@ class Project {
 
     /**
      * Serialize project properties to plain object
-     * @return {Object} 
+     * @return {Object}
      */
     serialize() {
         return {
@@ -44,13 +44,14 @@ class Project {
             settings:       this.settings,
             composition:    this.composition,
             actions:        this.actions,
-            errorMessage:   this.errorMessage
+            errorMessage:   this.errorMessage,
+            customScript:   this.customScript,
         };
     }
 
     /**
      * Desirialize data from plain object to Project object
-     * @param  {Object} params 
+     * @param  {Object} params
      */
     deserialize(params) {
         let data            = params            || {};
@@ -64,7 +65,7 @@ class Project {
         this.actions        = data.actions      || [];
         this.settings       = data.settings     || { outputModule: AE_OUTPUT_MODULE, outputExt: AE_OUTPUT_EXT };
         this.errorMessage   = data.errorMessage || null;
-
+        this.customScript   = data.customScript || null;
         return this;
     }
 
@@ -120,7 +121,7 @@ class Project {
      */
     onTick() {
         if (this.api === null) return;
-        
+
         this.api.get(this.uid).then((project) => {
             if (this.state !== project.state) {
                 this.deserialize( project );
@@ -165,7 +166,7 @@ class Project {
     }
 
     /**
-     * Event caller 
+     * Event caller
      * @param  {String} method Event name
      */
     callMethod(method) {
